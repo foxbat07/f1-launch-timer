@@ -1,38 +1,71 @@
+:root{
+  --swiss-blue: #168BD0;
+  --swiss-grey: #E2E3DD;
+  --swiss-red: #EE3531;
+}
+
 .App {
+  background-color: var(--swiss-grey);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: var(--swiss-red);
+  color: var(--swiss-grey);
+}
+
+
+.signal-group {
+  background: var(--swiss-blue);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 16px;
+}
+
+.signal {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.light-on {
+  background: var(--swiss-red);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.light-off {
+  background: var(--swiss-grey);
+}
+
+.light-shape {
+  border-radius: 50%;
+  height: 24px;
+  margin: 8px;
+  width: 24px;
+}
+
+
+.b-start, .b-restart {
+  background: var(--swiss-grey);
+  border: 1px solid var(--swiss-red);
+  color: var(--swiss-red);
+}
+
+.b-launch {
+  background: var(--swiss-red);
+  border: 1px solid var(--swiss-red);
+  color: var(--swiss-grey);
+}
+
+.button {
+  border-radius: 50%;
+  width: 128px;
+  height: 128px;
+  margin: 16px;
+}
+
+.App-footer {
+  color: var(--swiss-red);
 }
