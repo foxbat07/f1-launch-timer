@@ -10,7 +10,7 @@ const App = () => {
 	const [mode, setMode] = useState('START');
 
 	const [startTime,setStartTime] = useState(0);
-	// const [stopTime,setStopTime] = useState(0.0);
+	const [stopTime,setStopTime] = useState(0.0);
 	const [reactionTime, setReactionTime] = useState(0.0);
 	const [bestTime, setBestTime] = useState(1000000.0);
 
@@ -31,6 +31,7 @@ const App = () => {
 		const countDown5 = setInterval(() => {
 			if(lightsToBeOn < 5 ) {
 				// setLightsToBeOn(lightsToBeOn => lightsToBeOn + 1);
+				// console.log(lightsToBeOn);
 				lightsToBeOn++;
 				console.log(lightsToBeOn);
 			} else {
@@ -53,11 +54,11 @@ const App = () => {
 	}
 
 	const stopTimer = () => {
-		// setStopTime(performance.now());
+		setStopTime(performance.now());
 		let reactTime = Math.floor(performance.now() - startTime);
 		setReactionTime(reactTime);
 
-		// console.log('stop timer',stopTime);
+		console.log('stop timer',performance.now());
 		console.log('reaction', reactTime);
 
 		if(reactTime < bestTime && reactTime !== 0) {
