@@ -8,61 +8,61 @@ import Control from './components/Control';
 const App = () => {
 
 	const [mode, setMode] = useState('START');
-	const [timerState, setTimerState] = useState(false);
-	
-	const [seconds, setSeconds] = useState(0);
+
 	const [startTime,setStartTime] = useState(0);
-	const [stopTime,setStopTime] = useState(0.0);
-	const [timePassed,setTimePassed] = useState(0);
-	
+	// const [stopTime,setStopTime] = useState(0.0);
 	const [reactionTime, setReactionTime] = useState(0.0);
 	const [bestTime, setBestTime] = useState(1000000.0);
 
+	let lightsToBeOn = 0;
+	// const [lightsToBeOn, setLightsToBeOn] = useState(0);
+
 	const handleClick = () => {
 		if(mode === 'START' || mode === 'RESTART') {
-			// startTimer();
+			intiateCountDown();
 			setMode('LAUNCH');
-			setTimerState(true);
 		} else if (mode === 'LAUNCH') {
 			stopTimer();
 			setMode ('RESTART');
-			setTimerState(false);
-			setSeconds(0);
 		} 
 	};
 
-	useEffect(() => {
-	let interval = null;
-	if (timerState) {
-		interval = setInterval(() => {
-			if(seconds < 5 ) {
-				setSeconds(seconds => seconds + 1);
+	const intiateCountDown = () => {
+		const countDown5 = setInterval(() => {
+			if(lightsToBeOn < 5 ) {
+				// setLightsToBeOn(lightsToBeOn => lightsToBeOn + 1);
+				lightsToBeOn++;
+				console.log(lightsToBeOn);
 			} else {
-			setSeconds(0);
-			startTimer();
+				const randomDelay = 300 + 2700 * Math.random(); // set a random delay between 0.3 & 3 seconds
+				console.log('delay by', randomDelay);
+				setTimeout(() => {
+					console.log('delay end');
+					lightsToBeOn = 0;
+					startTimer();
+				}, randomDelay);
+				// setLightsToBeOn(0);
+				clearInterval(countDown5);
 			}
 		}, 1000);
-	} else if (!timerState && seconds !== 0) {
-		clearInterval(interval);
 	}
-		return () => clearInterval(interval);
-	}, [timerState, seconds]);
 	
 	const startTimer = () => {
-	setStartTime(performance.now());
-	console.log('start',performance.now());
+		setStartTime(performance.now());
+		console.log('start timer',performance.now());
 	}
 
 	const stopTimer = () => {
-	setStopTime(performance.now());
-	let reactTime = Math.floor(performance.now() - startTime);
-	setReactionTime(reactTime);
-	console.log('stop',performance.now());
-	console.log('reaction', typeof reactTime);
-	
-	if(reactTime < bestTime && reactTime !== 0) {
-		setBestTime(reactTime);
-	}
+		// setStopTime(performance.now());
+		let reactTime = Math.floor(performance.now() - startTime);
+		setReactionTime(reactTime);
+
+		// console.log('stop timer',stopTime);
+		console.log('reaction', reactTime);
+
+		if(reactTime < bestTime && reactTime !== 0) {
+			setBestTime(reactTime);
+		}
 	}
 
 	return (
@@ -71,7 +71,7 @@ const App = () => {
 				<h6>F1 LAUNCH TIMER</h6>
 			</header>
 			<div>
-				<SignalGroup position={seconds} />
+				<SignalGroup position={lightsToBeOn} />
 				<Status
 					primary={reactionTime || 'READY?'} 
 					secondary={bestTime} 
