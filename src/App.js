@@ -21,7 +21,6 @@ const App = () => {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
-    console.log(isActive);
     if(!isActive) {
       setIsActive(true);
       setTimer();
