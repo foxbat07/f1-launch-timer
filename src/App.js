@@ -21,7 +21,7 @@ const App = () => {
   const [isActive, setIsActive] = useState(false);
 
   const handleClick = () => {
-    console.log('click');
+    console.log(isActive);
     if(!isActive) {
       setIsActive(true);
       setTimer();
@@ -69,19 +69,20 @@ const App = () => {
       <div>current {currentTime}</div> */}
       {/* <div>total {totalTime}</div>
       <div>elapsed {elapsedTime}</div>
-      <div>reaction {reactionTime}</div>
-      <div>{signalPosition}</div> */}
+      <div>reaction {reactionTime}</div> */}
+      {/* <div>{isActive}</div> */}
       <div>
         <Status
           isActive
-					primary={Math.trunc(reactionTime) || 'READY?'} 
+					primary={Math.trunc(reactionTime)} 
 					secondary={Math.trunc(bestTime)}
 				/>
         <Control mode={isActive ? 'LAUNCH' : 'START'} handleClick ={handleClick} />
       </div>
       <footer>
+        Created by &nbsp;
 				<a className="App-footer" href="https://mohithingorani.com" target="_blank" rel="noopener noreferrer">
-					learn more
+					Mohit Hingorani
 				</a>
 			</footer>
     </div>
