@@ -1,66 +1,89 @@
 import React, { useState, useEffect } from 'react';
+
+import Control from './components/Control';
+import SignalGroup from './components/SignalGroup';
+import Status from './components/Status';
+
 import './App.css';
 
+const baseTime = 5; // 5 second gap
+
 const App = () => {
-  const [seconds, setSeconds] = useState(0);
+
+  const [bestTime, setBestTime] = useState(1000000.0);
+  const [totalTime, setTotalTime] = useState(0);
   const [startTime, setStartTime] = useState(0);
-  const [endTime, setEndTime] = useState(0);
+  const [elapsedTime, setElapsedTime] = useState(0);
   const [reactionTime, setReactionTime] = useState(0);
+
+  const [signalPosition, setSignalPosition] = useState(5);
+
   const [isActive, setIsActive] = useState(false);
 
-  function buttonState() {
-    if (isActive === false) {
-        setIsActive(true);
+  const handleClick = () => {
+    console.log('click');
+    if(!isActive) {
+      setIsActive(true);
+      setTimer();
+      setStartTime(Date.now());
     }
     else {
       setIsActive(false);
-      if(seconds > 5) {
-        setEndTime(Date.now());
-        setReactionTime(Date.now() - startTime);
-      }
-      else
-      setReactionTime(6969);
-      setSeconds(0);
-      setStartTime(0);
-      console.log(reactionTime);
+      const elapsed = elapsedTime - totalTime;
+      setReactionTime(elapsed);
+      if(elapsed < bestTime && elapsed > 0)
+        setBestTime(elapsed);
     }
-}
+  }
+
+  const setTimer = () => {
+    const rd = 0.3 + 2.7 * Math.random();
+    setTotalTime((baseTime+rd) * 1000);
+  }
+
+  const tick = () => {
+    setElapsedTime(Date.now()-startTime);  // repeat date now VIMP.
+    if(elapsedTime < totalTime )
+      setSignalPosition(Math.min(5, Math.trunc(elapsedTime/1000)));
+    else 
+      setSignalPosition(0);
+  }
 
   useEffect(() => {
     let interval = null;
     if (isActive) {
-      interval = setInterval(() => {
-        if(seconds >= 0 && seconds <= 5) {
-          setSeconds(seconds => seconds + 1);
-          console.log(seconds);
-        }
-        else if (seconds > 5) {
-          console.log(seconds);
-          clearInterval(interval);
-          setStartTime(Date.now());
-          // console.log(startTime);
-          // setIsActive(false);
-          }
-      }, 1000);
-    }  else if (!isActive && seconds !== 0) {
+      interval = setInterval(() => tick(), 5);
+    } else if (!isActive) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isActive, seconds]);
-
+   });
+  
   return (
-    <div className="app">
-      <div className="time">
-        {seconds}
+    <div className="App">
+      <header className="App-header">
+				<h6>F1 LAUNCH TIMER</h6>
+			</header>
+      <SignalGroup position={signalPosition} />
+      {/* <div>start {startTime}</div>
+      <div>current {currentTime}</div> */}
+      {/* <div>total {totalTime}</div>
+      <div>elapsed {elapsedTime}</div>
+      <div>reaction {reactionTime}</div>
+      <div>{signalPosition}</div> */}
+      <div>
+        <Status
+          isActive
+					primary={Math.trunc(reactionTime) || 'READY?'} 
+					secondary={Math.trunc(bestTime)}
+				/>
+        <Control mode={isActive ? 'LAUNCH' : 'START'} handleClick ={handleClick} />
       </div>
-      <div className="time">
-        {reactionTime}
-      </div>
-      <div className="row">
-        <button className="button" onClick={buttonState}>
-            {isActive ? 'LAUNCH' : 'START'}
-        </button>
-      </div>
+      <footer>
+				<a className="App-footer" href="https://mohithingorani.com" target="_blank" rel="noopener noreferrer">
+					learn more
+				</a>
+			</footer>
     </div>
   );
 };

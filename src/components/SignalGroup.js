@@ -4,9 +4,8 @@ import Signal from  './Signal';
 
 const SignalGroup  = ({position}) => (
   <div className="signal-group">
-    {position}
     {[...Array(position)].map((e, i) => <Signal key={i} status="on" />)}
-    {/* {[...Array(5 - position)].map((e, i) => <Signal key={i} status="off" />)} */}
+    {[...Array(5 - position)].map((e, i) => <Signal key={i} status="off" />)}
   </div>
 );
 
