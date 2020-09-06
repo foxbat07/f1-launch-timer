@@ -65,12 +65,6 @@ const App = () => {
 				<h6>F1 LAUNCH TIMER</h6>
 			</header>
       <SignalGroup position={signalPosition} />
-      {/* <div>start {startTime}</div>
-      <div>current {currentTime}</div> */}
-      {/* <div>total {totalTime}</div>
-      <div>elapsed {elapsedTime}</div>
-      <div>reaction {reactionTime}</div> */}
-      {/* <div>{isActive}</div> */}
       <div>
         <Status
           isActive

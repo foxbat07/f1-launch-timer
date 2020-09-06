@@ -47,7 +47,7 @@
 }
 
 
-.b-start, .b-restart {
+.b-start {
   background: var(--swiss-grey);
   border: 1px solid var(--swiss-red);
   color: var(--swiss-red);
@@ -55,14 +55,14 @@
 
 .b-launch {
   background: var(--swiss-red);
-  border: 1px solid var(--swiss-red);
+  border: 2px solid var(--swiss-red);
   color: var(--swiss-grey);
 }
 
 .button {
   border-radius: 50%;
-  width: 128px;
-  height: 128px;
+  width: 160px;
+  height: 160px;
   margin: 16px;
 }
 

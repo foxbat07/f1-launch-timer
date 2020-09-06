@@ -16,7 +16,7 @@ const secondaryFormatter = (value) => (
 
 const Status  = ({isActive, primary, secondary}) => (
   <div>
-    <h4>{primaryFormatter(primary)}</h4>
+    <h2>{primaryFormatter(primary)}</h2>
     <h6>{secondaryFormatter(secondary)}</h6>
   </div>
 );
