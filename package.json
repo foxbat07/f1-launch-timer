@@ -17,7 +17,7 @@
     "node": "13.13.0"
   },
   "scripts": {
-    "start": "node server/server.js",
+    "start": "node index.js",
     "run": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
