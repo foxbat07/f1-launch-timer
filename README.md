@@ -1,4 +1,4 @@
-F1 Launch Timer by Mohit Hingorani
+F1 Launch Timer
 
 Inspired by https://f1-start.glitch.me/
 I set out to combine Formula 1 & Swiss Graphic in a neat way.
